@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francieli Gonçalves — Analista de BI SR</title>
+<style>
+  @page { size: A4; margin: 0 }
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff;
+    color: #1a2e1e;
+    font-size: 11px;
+    line-height: 1.55;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Paleta: sage #a3c5a0 · verde claro #cde0b8 · creme #faf5c0 · teal #00bcc8 */
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ══ HEADER — destacado com gradiente da paleta ══ */
+  .header {
+    background: linear-gradient(120deg, #5aafa8 0%, #7ec9c0 30%, #a3c5a0 60%, #cde0b8 85%, #faf5c0 100%);
+    padding: 20px 26px 17px 26px;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #00bcc8, #7ec9c0, #cde0b8, #faf5c0);
+  }
+
+  .hd-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 10px;
+  }
+
+  .hd-name h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  }
+  .hd-name .role {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.88);
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  .hd-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hd-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+  }
+  .qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    flex-shrink: 0;
+  }
+  .qr-wrap img {
+    width: 58px;
+    height: 58px;
+    border-radius: 5px;
+    border: 2px solid rgba(255,255,255,0.6);
+    display: block;
+    background: #fff;
+  }
+  .qr-wrap span {
+    font-size: 7px;
+    color: #1a3a2a;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .crow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9.5px;
+    color: #1a3a2a;
+  }
+  .cico {
+    width: 15px; height: 15px;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 3px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px; flex-shrink: 0;
+  }
+
+  .summary {
+    background: #e8f5e0;
+    border-left: 4px solid #00bcc8;
+    padding: 10px 22px;
+    font-size: 10px;
+    color: #2a4a2e;
+    line-height: 1.6;
+    flex-shrink: 0;
+  }
+  .summary strong { color: #1a2e1e; font-weight: 700 }
+
+  /* ══ BODY — sidebar ESQUERDA + main DIREITA ══ */
+  .body {
+    display: grid;
+    grid-template-columns: 68mm 1fr;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* ── SIDEBAR (ESQUERDA) ── */
+  .sidebar {
+    background: #f0faf4;
+    border-right: 1px solid #cde0b8;
+    padding: 16px 14px 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .s-hd {
+    font-size: 7px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #009ea8;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #cde0b8;
+    margin-bottom: 6px;
+  }
+
+  .skill-group { margin-bottom: 11px }
+  .skill-group:last-child { margin-bottom: 0 }
+  .sg-name {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #2a4a2e;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sg-name::before {
+    content: '';
+    width: 3px; height: 11px;
+    background: #00bcc8;
+    border-radius: 2px;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .stags { display: flex; flex-wrap: wrap; gap: 3px }
+  .stag {
+    background: #e0f5f0;
+    border: 1px solid #a3c5a0;
+    border-radius: 3px;
+    padding: 2px 7px;
+    font-size: 8.5px;
+    color: #1a6060;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .stag.core {
+    background: #00bcc8;
+    border-color: #00bcc8;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .lng-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .lng-row:last-child { margin-bottom: 0 }
+  .lng-n { font-size: 9.5px; color: #2a4a2e; font-weight: 500 }
+  .dots  { display: flex; gap: 3px }
+  .d { width: 7px; height: 7px; border-radius: 50% }
+  .d.on  { background: #00bcc8 }
+  .d.off { background: #cde0b8; border: 1px solid #a3c5a0 }
+
+  .edu-ttl  { font-size: 10px; font-weight: 700; color: #1a2e1e }
+  .edu-inst { font-size: 9.5px; color: #557a5a }
+  .edu-yr   { font-size: 9px; color: #00bcc8; font-weight: 600; margin-top: 1px }
+
+  .cert {
+    font-size: 9px;
+    color: #3a5a3e;
+    padding: 2.5px 0 2.5px 7px;
+    border-left: 2px solid #a3c5a0;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+  .cert:last-child { margin-bottom: 0 }
+  .cy { font-weight: 700; color: #009ea8 }
+
+  /* ── MAIN (DIREITA) ── */
+  .main {
+    padding: 16px 22px 14px 18px;
+    overflow: hidden;
+    background: #fffef8;
+  }
+
+  .sec-hd {
+    font-size: 7.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #009ea8;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-hd::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #cde0b8, transparent);
+  }
+
+  .exp-card {
+    border-left: 3px solid #cde0b8;
+    padding: 0 0 17px 12px;
+    position: relative;
+  }
+  .exp-card:last-child { padding-bottom: 0 }
+  .exp-card.current { border-left-color: #00bcc8 }
+
+  .exp-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 1px;
+  }
+  .exp-role  { font-size: 11px; font-weight: 700; color: #1a2e1e }
+  .exp-badge {
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #009ea8;
+    background: #e0f5f0;
+    border: 1px solid #a3c5a0;
+    padding: 1px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .exp-co   { font-size: 9.5px; font-weight: 600; color: #557a5a; margin-bottom: 4px }
+  .exp-sub  {
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #009ea8;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin: 4px 0 1px;
+  }
+  .exp-desc { font-size: 9.5px; color: #3a5a3e; line-height: 1.48 }
+  .exp-desc ul { padding-left: 10px }
+  .exp-desc li { margin-bottom: 1.5px }
+  .exp-desc strong { color: #1a2e1e; font-weight: 600 }
+
+  @media print {
+    body { background: #fff }
+    .page { box-shadow: none }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER: tipografia limpa, sem bloco de cor -->
+  <header class="header">
+    <div class="hd-row">
+      <div class="hd-name">
+        <h1>Francieli Gonçalves<br>da Silva</h1>
+        <div class="role">Analista de BI SR &nbsp;·&nbsp; Business Intelligence &nbsp;·&nbsp; Engenharia de Dados</div>
+      </div>
+      <div class="hd-right">
+        <div class="hd-contact">
+          <div class="crow"><span class="cico">📱</span>(11) 99849-4787</div>
+          <div class="crow"><span class="cico">✉</span>francieligoncalves2609@gmail.com</div>
+          <div class="crow"><span class="cico">📍</span>Caraguatatuba, SP</div>
+          <div class="crow"><span class="cico">💼</span>linkedin.com/in/francieli-goncalves</div>
+          <div class="crow"><span class="cico">🌐</span>francieligoncalves2609-tech.github.io/francieli-portfolio</div>
+        </div>
+        <div class="qr-wrap">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://francieligoncalves2609-tech.github.io/francieli-portfolio/&color=1a3a2a&bgcolor=ffffff" alt="Portfólio QR">
+          <span>Portfólio</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUMMARY fora do header — fundo sólido legível -->
+  <div class="summary">
+    Profissional com mais de <strong>9 anos de experiência em dados</strong>, atuando em BI e Engenharia de Dados desde 2016. Domínio avançado em <strong>Power BI, DAX, SQL e ETL</strong>, com histórico em dashboards estratégicos, modelagem dimensional, métricas de marketing digital e governança de dados. Perfil analítico orientado a resultados, com facilidade para transformar necessidades de negócio em soluções escaláveis de impacto.
+  </div>
+
+  <!-- BODY: sidebar ESQUERDA + main DIREITA (diferente do Lucas) -->
+  <div class="body">
+
+    <!-- SIDEBAR ESQUERDA -->
+    <aside class="sidebar">
+
+      <div>
+        <div class="s-hd">Stack Técnica</div>
+
+        <div class="skill-group">
+          <div class="sg-name">Visualização</div>
+          <div class="stags">
+            <span class="stag core">Power BI</span>
+            <span class="stag core">Tableau</span>
+            <span class="stag core">Looker Studio</span>
+            <span class="stag">DAX</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-name">SQL &amp; Bancos</div>
+          <div class="stags">
+            <span class="stag core">SQL</span>
+            <span class="stag">Oracle</span>
+            <span class="stag">MySQL</span>
+            <span class="stag">PostgreSQL</span>
+            <span class="stag">SQL Server</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-name">Modelagem</div>
+          <div class="stags">
+            <span class="stag">Star Schema</span>
+            <span class="stag">Snowflake</span>
+            <span class="stag">Dataset</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-name">ETL &amp; Engenharia</div>
+          <div class="stags">
+            <span class="stag">Microsoft Fabric</span>
+            <span class="stag">Integration Services</span>
+            <span class="stag">Alteryx</span>
+            <span class="stag">Dataprep</span>
+            <span class="stag">ETL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-name">IA &amp; Analytics</div>
+          <div class="stags">
+            <span class="stag core">Genie IA</span>
+            <span class="stag">Google Analytics</span>
+            <span class="stag">Supermetrics</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="sg-name">Marketing Digital</div>
+          <div class="stags">
+            <span class="stag">CPC</span>
+            <span class="stag">CPM</span>
+            <span class="stag">CTR</span>
+            <span class="stag">CPA</span>
+            <span class="stag">ROAS</span>
+            <span class="stag">Google Ads</span>
+            <span class="stag">Meta Ads</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div>
+        <div class="s-hd">Idiomas</div>
+        <div class="lng-row">
+          <span class="lng-n">Espanhol</span>
+          <div class="dots">
+            <div class="d on"></div><div class="d on"></div><div class="d on"></div><div class="d off"></div><div class="d off"></div>
+          </div>
+        </div>
+        <div class="lng-row">
+          <span class="lng-n">Inglês</span>
+          <div class="dots">
+            <div class="d on"></div><div class="d on"></div><div class="d off"></div><div class="d off"></div><div class="d off"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="s-hd">Educação</div>
+        <div class="edu-ttl">Adm. de Banco de Dados</div>
+        <div class="edu-inst">Faculdade Impacta</div>
+        <div class="edu-yr">2016 – 2018</div>
+      </div>
+
+      <div>
+        <div class="s-hd">Cursos &amp; Certificações</div>
+        <div class="cert"><span class="cy">2025</span> Data Analytics — FIAP</div>
+        <div class="cert"><span class="cy">2022</span> Business Intelligence — FIAP</div>
+        <div class="cert"><span class="cy">2021</span> Google Analytics — Google</div>
+        <div class="cert"><span class="cy">2021</span> Partner Sales Accreditation — Tableau</div>
+        <div class="cert"><span class="cy">2021</span> UX &amp; Design Thinking — Alura</div>
+        <div class="cert"><span class="cy">2021</span> Alteryx Partner Training — Alteryx</div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN DIREITA -->
+    <main class="main">
+      <div class="sec-hd">Experiência Profissional</div>
+
+      <!-- Prodesp -->
+      <div class="exp-card current">
+        <div class="exp-head">
+          <div class="exp-role">Analista de BI SR</div>
+          <div class="exp-badge">2022 – Atualmente</div>
+        </div>
+        <div class="exp-co">Prodesp – Montreal</div>
+        <div class="exp-desc"><ul>
+          <li>Levantamento de requisitos com áreas de negócio e desenvolvimento de soluções de BI em ambiente governamental de alta complexidade</li>
+          <li>Criação de dashboards interativos em <strong>Power BI</strong> para suporte à tomada de decisão estratégica em verticais como <strong>Poupatempo, Saúde, Imóveis, Eleições, Demandas e Equipamentos Públicos</strong></li>
+          <li>Uso de <strong>Genie IA (Salesforce Einstein)</strong> para geração de insights inteligentes e automação de análises preditivas</li>
+          <li>Governança de relatórios: administração de permissões, workspaces, aplicativos e gestão de audiência</li>
+        </ul></div>
+      </div>
+
+      <!-- IDigital -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Analista de BI SR</div>
+          <div class="exp-badge">2020 – 2021</div>
+        </div>
+        <div class="exp-co">IDigital</div>
+        <div class="exp-sub">▸ Havas (Farma)</div>
+        <div class="exp-desc">
+          Dashboards para marketing farmacêutico com <strong>Supermetrics, Google Analytics e Data Studio</strong>. Monitoramento e análise de métricas de mídia paga — <strong>CPC, CPM, CTR, CPA e ROAS</strong> — com foco em funil de conversão (topo, meio e fundo), taxa de aquisição e retorno sobre investimento em campanhas farmacêuticas.
+        </div>
+        <div class="exp-sub" style="margin-top:5px">▸ Samsung</div>
+        <div class="exp-desc">Coordenação de projeto de treinamentos com distribuição de demandas por instrutor e dashboards de acompanhamento em <strong>Power BI</strong>.</div>
+      </div>
+
+      <!-- Truckweb -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Database Administrator</div>
+          <div class="exp-badge">2019 – 2020</div>
+        </div>
+        <div class="exp-co">Truckweb</div>
+        <div class="exp-desc">DBA <strong>SQL Server</strong>: administração, monitoramento, modelagem de dados, gestão de usuários e desenvolvimento de painéis em <strong>Power BI</strong>.</div>
+      </div>
+
+      <!-- Fiveacts -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Analista de BI JR</div>
+          <div class="exp-badge">2019 – 2020</div>
+        </div>
+        <div class="exp-co">Fiveacts</div>
+        <div class="exp-desc"><ul>
+          <li><strong>Sodexo Colômbia:</strong> dashboard financeiro em Tableau</li>
+          <li><strong>Samsung:</strong> manutenção e evolução de painéis em Tableau</li>
+          <li><strong>Unilever:</strong> desenvolvimento de relatórios em Power BI</li>
+        </ul></div>
+      </div>
+
+      <!-- Fatoti -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Analista de Banco de Dados JR</div>
+          <div class="exp-badge">2019</div>
+        </div>
+        <div class="exp-co">Fatoti &amp; Consultoria</div>
+        <div class="exp-desc">Tuning de queries, migração, modelagem, stored procedures e integrações em <strong>T-SQL</strong> para múltiplos clientes.</div>
+      </div>
+
+      <!-- RBrasil -->
+      <div class="exp-card">
+        <div class="exp-head">
+          <div class="exp-role">Analista de MIS JR</div>
+          <div class="exp-badge">2016 – 2018</div>
+        </div>
+        <div class="exp-co">RBrasil</div>
+        <div class="exp-desc">Análise de tráfego de ligações, relatórios estatísticos, <strong>SQL Server</strong> e painéis em <strong>QlikView</strong> e Excel.</div>
+      </div>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>
