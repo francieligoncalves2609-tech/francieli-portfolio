@@ -1,0 +1,1429 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Francieli Gonçalves — Portfólio</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0 }
+
+  :root {
+    --teal:      #00bcc8;
+    --teal-d:    #008f99;
+    --sage:      #a3c5a0;
+    --sage-l:    #cde0b8;
+    --cream:     #faf5c0;
+    --dark:      #1a3a2a;
+    --mid:       #2d5a3d;
+    --muted:     #5a8a6a;
+    --bg:        #fffef8;
+    --card:      #ffffff;
+    --border:    #e0eed8;
+  }
+
+  html { scroll-behavior: smooth }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ══ NAV ══ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,254,248,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-size: 18px; font-weight: 800; color: var(--dark);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo .dot { color: var(--teal) }
+  .nav-links { display: flex; gap: 32px }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 600;
+    color: var(--muted); transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--teal) }
+  .nav-cta {
+    background: var(--teal); color: #fff;
+    padding: 8px 20px; border-radius: 20px;
+    font-size: 13px; font-weight: 700; text-decoration: none;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--teal-d) }
+
+  /* ══ HERO ══ */
+  .hero {
+    min-height: 100vh;
+    padding: 100px 60px 60px;
+    display: flex; align-items: center;
+    background: linear-gradient(135deg, #f0faf4 0%, var(--bg) 60%, #f5fce8 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,188,200,0.08) 0%, transparent 70%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(163,197,160,0.12) 0%, transparent 70%);
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 460px; gap: 70px; align-items: center;
+    position: relative; z-index: 1;
+  }
+
+  /* ══ HERO DASH ANIMADO ══ */
+  .hero-dash {
+    display: flex; flex-direction: column; gap: 12px;
+    animation: dashFadeIn .8s ease-out both;
+  }
+  @keyframes dashFadeIn { from { opacity:0; transform: translateX(30px) } to { opacity:1; transform:none } }
+
+  .hd-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 16px 18px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .hd-ctitle {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--muted); margin-bottom: 12px;
+  }
+
+  /* KPIs */
+  .hd-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; padding: 14px 18px }
+  .hd-kpi { text-align: center }
+  .hd-kval {
+    font-size: 26px; font-weight: 900; color: var(--teal);
+    line-height: 1; margin-bottom: 4px;
+  }
+  .hd-klbl { font-size: 10px; color: var(--muted); font-weight: 600; line-height: 1.3 }
+  .hd-trend { font-size: 10px; font-weight: 700; color: #22c55e; margin-top: 3px }
+
+  /* Barras */
+  .hd-bar-row { display: flex; align-items: center; gap: 8px; margin-bottom: 7px }
+  .hd-blbl { font-size: 11px; color: var(--muted); min-width: 68px; font-weight: 600 }
+  .hd-btrack {
+    flex: 1; height: 7px; background: var(--border);
+    border-radius: 4px; overflow: hidden;
+  }
+  .hd-bfill {
+    height: 100%; width: 0; border-radius: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-d));
+    transition: width 1.2s cubic-bezier(.4,0,.2,1);
+  }
+  .hd-bpct { font-size: 10px; color: var(--muted); min-width: 26px; text-align: right; font-weight: 600 }
+
+  /* Linha */
+  .hd-line-card svg { width: 100%; height: 72px; display: block; overflow: visible }
+  .hd-linepath {
+    fill: none; stroke: var(--teal); stroke-width: 2.5;
+    stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: 500; stroke-dashoffset: 500;
+    animation: drawLine 2s ease-out .6s forwards;
+  }
+  .hd-area-path {
+    stroke: none;
+    fill: url(#hdGrad);
+    opacity: 0; animation: areaFade .8s ease-out 1.2s forwards;
+  }
+  @keyframes drawLine { to { stroke-dashoffset: 0 } }
+  @keyframes areaFade { to { opacity: 1 } }
+  .hd-dot {
+    r: 3.5; fill: #fff; stroke: var(--teal); stroke-width: 2;
+    opacity: 0;
+  }
+  .hd-xaxis {
+    display: flex; justify-content: space-between;
+    font-size: 9px; color: var(--muted); margin-top: 4px; font-weight: 600;
+  }
+
+  /* Donut mini */
+  .hd-bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+  .hd-donut-card { display: flex; align-items: center; gap: 12px }
+  .hd-donut-svg { width: 60px; height: 60px; flex-shrink: 0 }
+  .hd-donut-legend { font-size: 10px; color: var(--muted) }
+  .hd-donut-legend div { margin-bottom: 4px; display: flex; align-items: center; gap: 5px }
+  .hd-donut-legend .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink:0 }
+  .hd-donut-circle {
+    fill: none; stroke-width: 10; stroke-linecap: round;
+    stroke-dasharray: 0 126; animation: donutGrow 1.4s ease-out .4s forwards;
+    transform-origin: center; transform: rotate(-90deg);
+  }
+  @keyframes donutGrow { to { stroke-dasharray: var(--da) 126 } }
+  @keyframes dotPop { from { opacity:0; r:0 } to { opacity:1; r:3.5 } }
+  .hero-text {}
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,188,200,0.1); border: 1px solid rgba(0,188,200,0.3);
+    color: var(--teal-d); border-radius: 20px;
+    padding: 4px 14px; font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .hero-badge::before { content: '●'; font-size: 8px; color: var(--teal) }
+  .hero-title {
+    font-size: 54px; font-weight: 900; line-height: 1.05;
+    color: var(--dark); margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+  .hero-title .hl { color: var(--teal) }
+  .hero-sub {
+    font-size: 18px; font-weight: 600; color: var(--muted);
+    margin-bottom: 20px; letter-spacing: 0.5px;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--muted); line-height: 1.7;
+    max-width: 520px; margin-bottom: 36px;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap }
+  .btn-primary {
+    background: var(--teal); color: #fff;
+    padding: 14px 32px; border-radius: 30px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    transition: all .2s; box-shadow: 0 4px 20px rgba(0,188,200,0.3);
+  }
+  .btn-primary:hover { background: var(--teal-d); transform: translateY(-2px) }
+  .btn-secondary {
+    background: transparent; color: var(--dark);
+    padding: 14px 32px; border-radius: 30px;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    border: 2px solid var(--border); transition: all .2s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal) }
+
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 48px;
+    padding-top: 32px; border-top: 1px solid var(--border);
+  }
+  .stat-item {}
+  .stat-num { font-size: 28px; font-weight: 900; color: var(--teal) }
+  .stat-lbl { font-size: 12px; color: var(--muted); font-weight: 500 }
+
+  .hero-photo {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .photo-wrap {
+    width: 360px; height: 360px;
+    border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+    overflow: hidden;
+    border: 4px solid var(--teal);
+    box-shadow: 0 20px 60px rgba(0,188,200,0.2), 0 0 0 12px rgba(0,188,200,0.08);
+    position: relative;
+  }
+  .photo-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+  }
+  .photo-badge {
+    position: absolute; bottom: -10px; right: -10px;
+    background: #fff; border: 2px solid var(--border);
+    border-radius: 14px; padding: 10px 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    font-size: 12px; font-weight: 700; color: var(--dark);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .photo-badge .pbi { color: var(--teal) }
+  .photo-decor {
+    position: absolute; top: -20px; left: -20px;
+    width: 100px; height: 100px;
+    border: 3px solid var(--sage-l);
+    border-radius: 50%; opacity: .5;
+  }
+
+  /* ══ SECTION COMUM ══ */
+  section { padding: 80px 60px }
+  .section-inner { max-width: 1200px; margin: 0 auto }
+  .sec-label {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--teal); margin-bottom: 8px;
+  }
+  .sec-title {
+    font-size: 36px; font-weight: 900; color: var(--dark);
+    margin-bottom: 16px; letter-spacing: -0.5px;
+  }
+  .sec-desc { font-size: 15px; color: var(--muted); max-width: 560px; line-height: 1.7 }
+
+  /* ══ SOBRE ══ */
+  .sobre { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border) }
+  .sobre-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    margin-top: 48px; align-items: start;
+  }
+  .sobre-text { font-size: 15px; color: var(--muted); line-height: 1.8 }
+  .sobre-text p { margin-bottom: 16px }
+  .sobre-text strong { color: var(--dark) }
+
+  .skills-title {
+    font-size: 13px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--muted); margin-bottom: 16px;
+  }
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+  .skill-item {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .skill-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--teal), var(--teal-d));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .skill-name { font-size: 13px; font-weight: 700; color: var(--dark) }
+  .skill-lv { font-size: 11px; color: var(--muted) }
+
+  /* ══ PROJETOS ══ */
+  .projetos { background: var(--bg) }
+  .proj-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 28px; margin-top: 48px;
+  }
+
+  .proj-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    transition: all .3s; box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,188,200,0.15) }
+
+  .proj-thumb {
+    width: 100%; height: 220px;
+    position: relative; overflow: hidden;
+  }
+  .proj-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    transition: transform .4s;
+  }
+  .proj-card:hover .proj-thumb img { transform: scale(1.04) }
+
+  /* Blur overlay para números sensíveis */
+  .blur-overlay {
+    position: absolute; inset: 0;
+    background: rgba(255,254,248,0);
+    pointer-events: none;
+  }
+  .blur-num {
+    position: absolute;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.4);
+    border-radius: 4px;
+  }
+
+  /* Dashboard mockup CSS para os projetos */
+  .dash-mock {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column;
+    padding: 14px; gap: 8px;
+  }
+  .dm-header {
+    height: 28px; border-radius: 6px;
+    display: flex; align-items: center; padding: 0 10px;
+    font-size: 10px; font-weight: 700; color: #fff;
+  }
+  .dm-kpis { display: grid; grid-template-columns: repeat(4,1fr); gap: 5px }
+  .dm-kpi {
+    height: 44px; border-radius: 6px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 2px;
+  }
+  .dm-kpi .lbl { font-size: 7px; color: rgba(255,255,255,0.7) }
+  .dm-kpi .val {
+    font-size: 11px; font-weight: 800; color: #fff;
+    filter: blur(5px); user-select: none;
+  }
+  .dm-kpi .val.no-blur { filter: none }
+  .dm-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; flex: 1 }
+  .dm-chart { border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 4px }
+  .dm-bar-row { display: flex; align-items: center; gap: 4px }
+  .dm-bar-lbl { font-size: 6px; color: rgba(255,255,255,0.6); min-width: 28px }
+  .dm-bar-wrap { flex: 1; height: 5px; background: rgba(255,255,255,0.15); border-radius: 3px }
+  .dm-bar-fill { height: 100%; border-radius: 3px }
+  .dm-donut-wrap { display: flex; align-items: center; justify-content: center; flex: 1 }
+
+  .proj-body { padding: 20px 22px 22px }
+  .proj-company {
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--teal); margin-bottom: 4px;
+  }
+  .proj-title { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 8px }
+  .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px }
+  .ptag {
+    background: rgba(0,188,200,0.08); border: 1px solid rgba(0,188,200,0.2);
+    color: var(--teal-d); border-radius: 20px;
+    padding: 3px 10px; font-size: 11px; font-weight: 600;
+  }
+  .ptag.sage { background: rgba(163,197,160,0.15); border-color: rgba(163,197,160,0.4); color: var(--mid) }
+  .proj-confidential {
+    display: flex; align-items: center; gap: 5px;
+    font-size: 10px; color: var(--muted); font-style: italic;
+  }
+  .proj-confidential::before { content: '🔒' }
+
+  /* ══ PROCESSO ══ */
+  .processo { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border) }
+  .proc-flow {
+    display: grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+    gap: 0; align-items: start; margin-top: 48px;
+  }
+  .proc-arrow {
+    font-size: 28px; color: var(--teal); padding-top: 48px;
+    display: flex; align-items: flex-start; justify-content: center;
+    opacity: .5; padding-left: 8px; padding-right: 8px;
+  }
+  .proc-step {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px 24px;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(24px);
+    transition: all .5s ease-out;
+  }
+  .proc-step.visible { opacity: 1; transform: none }
+  .proc-step::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 4px; background: linear-gradient(90deg, var(--teal), var(--sage));
+  }
+  .proc-step:hover {
+    border-color: rgba(0,188,200,0.3);
+    box-shadow: 0 8px 32px rgba(0,188,200,0.1);
+    transform: translateY(-4px);
+  }
+  .proc-icon { font-size: 32px; margin-bottom: 10px }
+  .proc-num {
+    font-size: 11px; font-weight: 900; letter-spacing: 2px;
+    color: var(--teal); margin-bottom: 6px; text-transform: uppercase;
+  }
+  .proc-name { font-size: 15px; font-weight: 800; color: var(--dark); margin-bottom: 10px }
+  .proc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px }
+  .proc-tags { display: flex; flex-wrap: wrap; gap: 5px }
+  .proc-tags span {
+    background: rgba(0,188,200,0.08); border: 1px solid rgba(0,188,200,0.2);
+    color: var(--teal-d); border-radius: 12px;
+    padding: 2px 9px; font-size: 10px; font-weight: 700;
+  }
+
+  /* ══ OUTROS PROJETOS (setor) ══ */
+  .outros-wrap { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border) }
+  .outros-title {
+    font-size: 22px; font-weight: 900; color: var(--dark);
+    margin-bottom: 6px; margin-top: 8px;
+  }
+  .outros-desc { font-size: 14px; color: var(--muted); margin-bottom: 28px }
+  .setor-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .setor-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 20px 18px;
+    transition: all .25s; cursor: default;
+  }
+  .setor-card:hover {
+    border-color: rgba(0,188,200,0.4);
+    box-shadow: 0 8px 28px rgba(0,188,200,0.1);
+    transform: translateY(-3px);
+  }
+  .setor-icon { font-size: 26px; margin-bottom: 10px; display: block }
+  .setor-name { font-size: 13px; font-weight: 800; color: var(--dark); margin-bottom: 4px }
+  .setor-cos { font-size: 12px; color: var(--muted); line-height: 1.5; margin-bottom: 12px }
+  .setor-tags { display: flex; flex-wrap: wrap; gap: 4px }
+  .stag {
+    background: rgba(0,188,200,0.08); border: 1px solid rgba(0,188,200,0.2);
+    color: var(--teal-d); border-radius: 12px;
+    padding: 2px 8px; font-size: 10px; font-weight: 600;
+  }
+  .stag.sage { background: rgba(163,197,160,0.15); border-color: rgba(163,197,160,0.4); color: var(--mid) }
+
+  /* ══ MODAL ══ */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(10,20,30,0.75); backdrop-filter: blur(6px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .3s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all }
+  .modal-box {
+    background: #fff; border-radius: 24px;
+    width: 92vw; max-width: 960px; max-height: 88vh;
+    display: flex; flex-direction: column; overflow: hidden;
+    transform: scale(.94) translateY(24px); transition: transform .35s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.4);
+  }
+  .modal-overlay.open .modal-box { transform: none }
+  .modal-hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 28px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .modal-company { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--teal) }
+  .modal-title { font-size: 20px; font-weight: 900; color: var(--dark); margin-top: 2px }
+  .modal-close {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--bg); cursor: pointer; font-size: 16px; color: var(--muted);
+    display: flex; align-items: center; justify-content: center; transition: all .2s; flex-shrink: 0;
+  }
+  .modal-close:hover { background: var(--teal); color: #fff; border-color: var(--teal) }
+  .modal-dash-area { flex: 1; overflow: hidden; min-height: 380px; max-height: 480px }
+  .modal-dash-area > div { width: 100%; height: 100% }
+  .modal-ftr {
+    padding: 16px 28px; border-top: 1px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .modal-ftr .ptag { background: rgba(0,188,200,0.08); border: 1px solid rgba(0,188,200,0.2); color: var(--teal-d); border-radius: 20px; padding: 3px 10px; font-size: 11px; font-weight: 600 }
+  .modal-ftr .ptag.sage { background: rgba(163,197,160,0.15); border-color: rgba(163,197,160,0.4); color: var(--mid) }
+  .modal-conf { font-size: 10px; color: var(--muted); font-style: italic; margin-left: auto }
+  .modal-conf::before { content: '🔒 ' }
+
+  .proj-card, .setor-card { cursor: pointer }
+
+  /* ══ CONTATO ══ */
+  .contato {
+    background: var(--dark);
+    text-align: center;
+  }
+  .contato .sec-label { color: var(--sage) }
+  .contato .sec-title { color: #fff }
+  .contato .sec-desc { color: rgba(255,255,255,0.6); margin: 0 auto 40px }
+  .contato-cards {
+    display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .contato-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 24px 28px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    min-width: 180px; text-decoration: none; transition: all .2s;
+  }
+  .contato-card:hover { background: rgba(0,188,200,0.12); border-color: rgba(0,188,200,0.4); transform: translateY(-4px) }
+  .contato-card .ico { font-size: 28px }
+  .contato-card .lbl { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; font-weight: 700 }
+  .contato-card .val { font-size: 13px; color: #fff; font-weight: 600 }
+
+  .footer-bar {
+    background: rgba(0,0,0,0.2);
+    padding: 16px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: rgba(255,255,255,0.4);
+  }
+  .footer-bar span { color: var(--teal) }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Francieli<span class="dot">.</span></div>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
+  </div>
+  <a href="#contato" class="nav-cta">Fale comigo</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Disponível para projetos</div>
+      <h1 class="hero-title">Olá, sou<br><span class="hl">Francieli</span><br>Gonçalves</h1>
+      <div class="hero-sub">Analista de Dados & BI · Power BI · SQL</div>
+      <p class="hero-desc">
+        Transformo dados em decisões. Especialista em desenvolvimento de dashboards,
+        modelagem de dados e automação de processos com mais de <strong>9 anos de experiência</strong>
+        em grandes empresas como Prodesp e Havas.
+      </p>
+      <div class="hero-btns">
+        <a href="#projetos" class="btn-primary">Ver projetos</a>
+        <a href="curriculo_francieli.html" class="btn-secondary" target="_blank">Ver currículo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">9+</div>
+          <div class="stat-lbl">Anos de experiência</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">15+</div>
+          <div class="stat-lbl">Projetos no portfólio</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100%</div>
+          <div class="stat-lbl">Do zero</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD ANIMADO -->
+    <div class="hero-dash" id="heroDash">
+
+      <!-- KPIs -->
+      <div class="hd-card hd-kpi-row">
+        <div class="hd-kpi">
+          <div class="hd-kval" data-target="345" id="kv1">0</div>
+          <div class="hd-klbl">Indicadores criados</div>
+          <div class="hd-trend">▲ 12%</div>
+        </div>
+        <div class="hd-kpi">
+          <div class="hd-kval" data-target="98" id="kv2">0</div>
+          <div class="hd-klbl">% No prazo</div>
+          <div class="hd-trend">▲ 3%</div>
+        </div>
+        <div class="hd-kpi">
+          <div class="hd-kval" data-target="15" id="kv3">0</div>
+          <div class="hd-klbl">Setores atendidos</div>
+          <div class="hd-trend">▲ novo</div>
+        </div>
+      </div>
+
+      <!-- Barras -->
+      <div class="hd-card">
+        <div class="hd-ctitle">Projetos por Setor</div>
+        <div class="hd-bar-row"><span class="hd-blbl">Financeiro</span><div class="hd-btrack"><div class="hd-bfill" data-w="88"></div></div><span class="hd-bpct">88%</span></div>
+        <div class="hd-bar-row"><span class="hd-blbl">Telecom</span><div class="hd-btrack"><div class="hd-bfill" data-w="72"></div></div><span class="hd-bpct">72%</span></div>
+        <div class="hd-bar-row"><span class="hd-blbl">Varejo</span><div class="hd-btrack"><div class="hd-bfill" data-w="78"></div></div><span class="hd-bpct">78%</span></div>
+        <div class="hd-bar-row"><span class="hd-blbl">Saúde</span><div class="hd-btrack"><div class="hd-bfill" data-w="65"></div></div><span class="hd-bpct">65%</span></div>
+        <div class="hd-bar-row" style="margin-bottom:0"><span class="hd-blbl">Governo</span><div class="hd-btrack"><div class="hd-bfill" data-w="55"></div></div><span class="hd-bpct">55%</span></div>
+      </div>
+
+      <!-- Linha + Donut -->
+      <div class="hd-bottom-row">
+        <div class="hd-card hd-line-card">
+          <div class="hd-ctitle">Crescimento</div>
+          <svg viewBox="0 0 260 72">
+            <defs>
+              <linearGradient id="hdGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00bcc8" stop-opacity=".25"/>
+                <stop offset="100%" stop-color="#00bcc8" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="hd-area-path" d="M0,65 C30,58 55,50 90,38 C120,28 150,18 190,10 C215,5 240,3 260,2 L260,72 L0,72 Z"/>
+            <path class="hd-linepath" d="M0,65 C30,58 55,50 90,38 C120,28 150,18 190,10 C215,5 240,3 260,2"/>
+            <circle class="hd-dot" cx="0"   cy="65" style="animation:dotPop .3s ease-out 1.8s forwards"/>
+            <circle class="hd-dot" cx="90"  cy="38" style="animation:dotPop .3s ease-out 2.0s forwards"/>
+            <circle class="hd-dot" cx="190" cy="10" style="animation:dotPop .3s ease-out 2.2s forwards"/>
+            <circle class="hd-dot" cx="260" cy="2"  style="animation:dotPop .3s ease-out 2.4s forwards"/>
+          </svg>
+          <div class="hd-xaxis"><span>2019</span><span>2021</span><span>2023</span><span>2025</span></div>
+        </div>
+
+        <div class="hd-card hd-donut-card">
+          <svg class="hd-donut-svg" viewBox="0 0 44 44">
+            <circle cx="22" cy="22" r="20" fill="none" stroke="#eef8f7" stroke-width="10"/>
+            <circle class="hd-donut-circle" cx="22" cy="22" r="20" stroke="#00bcc8" style="--da:88"/>
+            <circle class="hd-donut-circle" cx="22" cy="22" r="20" stroke="#a3c5a0" style="--da:10; animation-delay:.6s"/>
+          </svg>
+          <div class="hd-donut-legend">
+            <div><span class="dot" style="background:#00bcc8"></span>Power BI · 88%</div>
+            <div><span class="dot" style="background:#a3c5a0"></span>Power Apps · 12%</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /hero-dash -->
+
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre" id="sobre">
+  <div class="section-inner">
+    <div class="sec-label">Sobre mim</div>
+    <h2 class="sec-title">Dados com propósito</h2>
+    <div class="sobre-grid">
+      <div class="sobre-text">
+        <p>
+          Sou analista de dados com <strong>mais de 9 anos de experiência</strong> transformando dados complexos em visualizações claras e decisões estratégicas. Minha trajetória inclui passagens por empresas como <strong>Prodesp</strong> (onde trabalhei com domínios como Poupatempo, Saúde e Eleições) e <strong>Havas</strong>, onde atuei com métricas de marketing digital como CPC, CPM, CTR, CPA e ROAS.
+        </p>
+        <p>
+          Tenho experiência sólida em todo o ciclo de vida de projetos de BI: do <strong>levantamento de requisitos</strong> à entrega final, passando pela modelagem de dados, criação de medidas DAX e desenvolvimento de dashboards interativos.
+        </p>
+        <p>
+          Também atuo com <strong>IA aplicada a dados</strong> (Genie IA na Prodesp), marketing digital analytics e soluções de visualização para diferentes segmentos de mercado.
+        </p>
+      </div>
+      <div>
+        <div class="skills-title">Stack tecnológica</div>
+        <div class="skills-grid">
+          <div class="skill-item">
+            <div class="skill-icon">📊</div>
+            <div><div class="skill-name">Power BI</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">🗄️</div>
+            <div><div class="skill-name">SQL</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">🧮</div>
+            <div><div class="skill-name">DAX</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">⚡</div>
+            <div><div class="skill-name">Power Query</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">🤖</div>
+            <div><div class="skill-name">IA & Analytics</div><div class="skill-lv">Intermediário</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">📈</div>
+            <div><div class="skill-name">Marketing Digital</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">🗂️</div>
+            <div><div class="skill-name">ETL</div><div class="skill-lv">Avançado</div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-icon">🎨</div>
+            <div><div class="skill-name">Figma / DataViz</div><div class="skill-lv">Intermediário</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="processo" id="processo">
+  <div class="section-inner">
+    <div class="sec-label">Como trabalho</div>
+    <h2 class="sec-title">Meu processo</h2>
+    <p class="sec-desc">Do primeiro contato com o cliente até o dashboard em produção — cada etapa com método.</p>
+
+    <div class="proc-flow">
+
+      <div class="proc-step" data-step="1">
+        <div class="proc-icon">🔍</div>
+        <div class="proc-num">01</div>
+        <div class="proc-name">Levantamento de Requisitos</div>
+        <p class="proc-desc">Reunião com o cliente para entender a dor, mapear indicadores e definir escopo do projeto.</p>
+        <div class="proc-tags">
+          <span>Entrevistas</span><span>KPIs</span><span>Escopo</span>
+        </div>
+      </div>
+
+      <div class="proc-arrow">→</div>
+
+      <div class="proc-step" data-step="2">
+        <div class="proc-icon">⚙️</div>
+        <div class="proc-num">02</div>
+        <div class="proc-name">ETL da Base</div>
+        <p class="proc-desc">Extração, transformação e carga dos dados — limpeza, padronização e integração de fontes.</p>
+        <div class="proc-tags">
+          <span>Power Query</span><span>SQL</span><span>ETL</span>
+        </div>
+      </div>
+
+      <div class="proc-arrow">→</div>
+
+      <div class="proc-step" data-step="3">
+        <div class="proc-icon">🗂️</div>
+        <div class="proc-num">03</div>
+        <div class="proc-name">Prototipação do Modelo</div>
+        <p class="proc-desc">Modelagem dimensional, relacionamentos entre tabelas e criação de medidas DAX.</p>
+        <div class="proc-tags">
+          <span>DAX</span><span>Star Schema</span><span>Figma</span>
+        </div>
+      </div>
+
+      <div class="proc-arrow">→</div>
+
+      <div class="proc-step" data-step="4">
+        <div class="proc-icon">📊</div>
+        <div class="proc-num">04</div>
+        <div class="proc-name">Visualização</div>
+        <p class="proc-desc">Dashboard final com foco em UX, clareza visual e storytelling de dados para o usuário.</p>
+        <div class="proc-tags">
+          <span>Power BI</span><span>UX</span><span>DataViz</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJETOS -->
+<section class="projetos" id="projetos">
+  <div class="section-inner">
+    <div class="sec-label">Portfólio</div>
+    <h2 class="sec-title">Projetos desenvolvidos</h2>
+    <p class="sec-desc">Todos os projetos abaixo foram criados do zero — do levantamento de requisitos à entrega final.</p>
+
+    <div class="proj-grid">
+
+      <!-- DAIICHI SANKYO -->
+      <div class="proj-card">
+        <div class="proj-thumb">
+          <!-- Dashboard Mockup: Daiichi Sankyo PDI -->
+          <div class="dash-mock" style="background: linear-gradient(135deg, #1a3a5c 0%, #0d2340 100%)">
+            <div class="dm-header" style="background: rgba(0,100,180,0.5)">
+              Desenvolvimento Organizacional / PDI
+            </div>
+            <div class="dm-kpis">
+              <div class="dm-kpi" style="background:rgba(0,100,180,0.3)">
+                <span class="lbl">Colaboradores</span>
+                <span class="val">███</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(0,150,136,0.3)">
+                <span class="lbl">Com PDI</span>
+                <span class="val">██</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(0,100,180,0.3)">
+                <span class="lbl">% PDI</span>
+                <span class="val">█,█%</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(200,50,50,0.3)">
+                <span class="lbl">Acima Limite</span>
+                <span class="val">█,█%</span>
+              </div>
+            </div>
+            <div class="dm-charts">
+              <!-- 9box grid -->
+              <div class="dm-chart" style="background:rgba(255,255,255,0.05)">
+                <div style="font-size:7px;color:rgba(255,255,255,0.7);margin-bottom:4px;font-weight:700">Visão 9Box</div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;flex:1">
+                  <div style="background:rgba(0,150,136,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">7</div>
+                  <div style="background:rgba(0,150,136,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">8</div>
+                  <div style="background:rgba(0,150,136,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">9</div>
+                  <div style="background:rgba(0,100,180,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">4</div>
+                  <div style="background:rgba(0,100,180,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">5</div>
+                  <div style="background:rgba(0,100,180,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">6</div>
+                  <div style="background:rgba(100,100,100,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">1</div>
+                  <div style="background:rgba(100,100,100,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">2</div>
+                  <div style="background:rgba(100,100,100,0.4);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700">3</div>
+                </div>
+              </div>
+              <div class="dm-chart" style="background:rgba(255,255,255,0.05)">
+                <div style="font-size:7px;color:rgba(255,255,255,0.7);margin-bottom:4px;font-weight:700">PDI por Área</div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl">Divorc.</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:85%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl">Solteiro</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:95%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl">Administ.</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:50%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl">Casado</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:78%;background:#2196f3"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl">Gerente</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:20%;background:#2196f3"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-company">Daiichi Sankyo</div>
+          <div class="proj-title">Dashboard RH — PDI & 9Box</div>
+          <p class="proj-desc">Dashboard de Desenvolvimento Organizacional com visão 9Box, acompanhamento de PDI por área, avaliação de desempenho e planos de sucessão. Desenvolvido do zero para gestão estratégica de pessoas.</p>
+          <div class="proj-tags">
+            <span class="ptag">Power BI</span>
+            <span class="ptag">RH Analytics</span>
+            <span class="ptag sage">9Box</span>
+            <span class="ptag sage">PDI</span>
+            <span class="ptag sage">Sucessão</span>
+          </div>
+          <div class="proj-confidential">Dados ocultados por confidencialidade</div>
+        </div>
+      </div>
+
+      <!-- CASA & CONSTRUÇÃO -->
+      <div class="proj-card">
+        <div class="proj-thumb">
+          <!-- Dashboard Mockup: C&C -->
+          <div class="dash-mock" style="background: linear-gradient(135deg, #f5f7fa 0%, #e8edf5 100%)">
+            <div class="dm-header" style="background: #f47920; justify-content: space-between">
+              <span>Painel de Navegação C&amp;C</span>
+              <span style="font-size:9px;opacity:.8">Gestão Corporativa Integrada</span>
+            </div>
+            <!-- Nav cards -->
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;flex:1;padding:4px 0">
+              <div style="background:#fff;border-radius:8px;border:1px solid #e0e8f0;padding:8px;display:flex;flex-direction:column;gap:3px">
+                <div style="font-size:8px;color:#f47920;font-weight:800">● Contábil</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;flex:1">
+                  <div style="background:#f0f4ff;border-radius:4px;padding:4px;font-size:6px;color:#1a237e;font-weight:600">Exibir Doc.<div style="color:#999;font-weight:400">FB03</div></div>
+                  <div style="background:#1a73e8;border-radius:4px;padding:4px;font-size:6px;color:#fff;font-weight:600">Partidas<div style="opacity:.8;font-weight:400">FBL3N</div></div>
+                  <div style="background:#1a73e8;border-radius:4px;padding:4px;font-size:6px;color:#fff;font-weight:600">Razão Geral<div style="opacity:.8;font-weight:400">FAGLL03</div></div>
+                  <div style="background:#f0f4ff;border-radius:4px;padding:4px;font-size:6px;color:#1a237e;font-weight:600">Razão HANA<div style="color:#999;font-weight:400">FAGLL03H</div></div>
+                </div>
+              </div>
+              <div style="background:#fff;border-radius:8px;border:1px solid #e0e8f0;padding:8px;display:flex;flex-direction:column;gap:3px">
+                <div style="font-size:8px;color:#e65100;font-weight:800">● Financeiro</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;flex:1">
+                  <div style="background:#1a73e8;border-radius:4px;padding:4px;font-size:6px;color:#fff;font-weight:600">Contas a Rec.<div style="opacity:.8;font-weight:400">FBLSH_AR</div></div>
+                  <div style="background:#1a73e8;border-radius:4px;padding:4px;font-size:6px;color:#fff;font-weight:600">Contas a Pagar<div style="opacity:.8;font-weight:400">FBL1H</div></div>
+                  <div style="background:#f0f4ff;border-radius:4px;padding:4px;font-size:6px;color:#1a237e;font-weight:600">Balanço Pat.<div style="color:#999;font-weight:400">F.01</div></div>
+                  <div style="background:#f0f4ff;border-radius:4px;padding:4px;font-size:6px;color:#1a237e;font-weight:600">Diário Cont.<div style="color:#999;font-weight:400">S_ALR</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-company">Casa &amp; Construção</div>
+          <div class="proj-title">Painel de Navegação SAP</div>
+          <p class="proj-desc">Painel de navegação corporativa desenvolvido em Power Apps integrando módulos SAP (Contábil, Financeiro e Relatórios). Interface unificada com acesso direto a transações como Razão Geral, Contas a Receber, Balanço Patrimonial e Diário Contábil.</p>
+          <div class="proj-tags">
+            <span class="ptag">Power Apps</span>
+            <span class="ptag">SAP</span>
+            <span class="ptag sage">UX Design</span>
+            <span class="ptag sage">Financeiro</span>
+            <span class="ptag sage">Contábil</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TERRA INVESTIMENTOS -->
+      <div class="proj-card">
+        <div class="proj-thumb">
+          <!-- Dashboard Mockup: Terra Investimentos -->
+          <div class="dash-mock" style="background: linear-gradient(135deg, #0f1e0f 0%, #1a2e1a 100%)">
+            <div class="dm-header" style="background:rgba(0,150,50,0.3); justify-content:space-between">
+              <span>Painel Geral — Terra Investimentos</span>
+              <span style="font-size:8px;opacity:.6">Diário</span>
+            </div>
+            <div class="dm-kpis">
+              <div class="dm-kpi" style="background:rgba(0,150,50,0.2);border:1px solid rgba(0,200,80,0.2)">
+                <span class="lbl">Resultado Dia</span>
+                <span class="val">███.███</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(0,100,200,0.2);border:1px solid rgba(0,150,255,0.2)">
+                <span class="lbl">AuC</span>
+                <span class="val">█,██ Bi</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(0,150,50,0.2);border:1px solid rgba(0,200,80,0.2)">
+                <span class="lbl">Clientes Ativos</span>
+                <span class="val">██.███</span>
+              </div>
+              <div class="dm-kpi" style="background:rgba(200,0,0,0.2);border:1px solid rgba(255,0,0,0.2)">
+                <span class="lbl">Churn</span>
+                <span class="val">-█.███</span>
+              </div>
+            </div>
+            <div class="dm-charts">
+              <div class="dm-chart" style="background:rgba(255,255,255,0.04)">
+                <div style="font-size:7px;color:rgba(255,255,255,0.6);margin-bottom:4px;font-weight:700">Receita por Mesa</div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Bovespa</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:90%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Rio de Jan.</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:60%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Agrícola</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:55%;background:#4caf50"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">B2C SP</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:52%;background:#2196f3"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Escritórios</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:35%;background:#2196f3"></div></div></div>
+              </div>
+              <div class="dm-chart" style="background:rgba(255,255,255,0.04)">
+                <div style="font-size:7px;color:rgba(255,255,255,0.6);margin-bottom:4px;font-weight:700">AuC por Segmento</div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Renda Fixa</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:95%;background:#ffb300"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">À Vista</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:45%;background:#ffb300"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Fundos</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:20%;background:#ff7043"></div></div></div>
+                <div class="dm-bar-row"><div class="dm-bar-lbl" style="color:rgba(255,255,255,0.5)">Tesouro</div><div class="dm-bar-wrap"><div class="dm-bar-fill" style="width:10%;background:#ff7043"></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-company">Terra Investimentos</div>
+          <div class="proj-title">Painel Financeiro — AuC & Receita</div>
+          <p class="proj-desc">Dashboard financeiro completo com monitoramento de AuC (Assets under Custody), receita por mesa, clientes ativos, churn, ranking de escritórios e análise por produto de investimento. Desenvolvido do zero para gestão de assets.</p>
+          <div class="proj-tags">
+            <span class="ptag">Power BI</span>
+            <span class="ptag">Financeiro</span>
+            <span class="ptag sage">AuC</span>
+            <span class="ptag sage">Investimentos</span>
+            <span class="ptag sage">B2B</span>
+          </div>
+          <div class="proj-confidential">Dados ocultados por confidencialidade</div>
+        </div>
+      </div>
+
+    </div><!-- /proj-grid -->
+
+    <!-- OUTROS SETORES -->
+    <div class="outros-wrap">
+      <div class="sec-label">Mais projetos</div>
+      <div class="outros-title">Projetos por setor</div>
+      <p class="outros-desc">Outros projetos desenvolvidos em diferentes segmentos de mercado — todos com Power BI, criados do zero.</p>
+      <div class="setor-grid">
+
+        <div class="setor-card">
+          <span class="setor-icon">🚛</span>
+          <div class="setor-name">Logística</div>
+          <div class="setor-cos">Truckweb · Etrind</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Frota</span>
+            <span class="stag sage">Operações</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🔍</span>
+          <div class="setor-name">Prevenção à Lavagem de Dinheiro</div>
+          <div class="setor-cos">Fato</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Compliance</span>
+            <span class="stag sage">PLD</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🛣️</span>
+          <div class="setor-name">Mobilidade & Pedágio</div>
+          <div class="setor-cos">TAG · Sem Parar</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Mobilidade</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">📱</span>
+          <div class="setor-name">Varejo de Eletrônicos</div>
+          <div class="setor-cos">Samsung</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Vendas</span>
+            <span class="stag sage">Varejo</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🛡️</span>
+          <div class="setor-name">Seguradora</div>
+          <div class="setor-cos">Zurich</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Seguros</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">📡</span>
+          <div class="setor-name">Telefonia</div>
+          <div class="setor-cos">Claro · Telefonica · OI</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Telecom</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🎓</span>
+          <div class="setor-name">Educação</div>
+          <div class="setor-cos">Falconi · Somos Educação</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">EdTech</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🏥</span>
+          <div class="setor-name">Saúde & Pharma</div>
+          <div class="setor-cos">Havas · Daiichi Sankyo</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">RH Analytics</span>
+            <span class="stag sage">Marketing</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">♻️</span>
+          <div class="setor-name">Resseguro</div>
+          <div class="setor-cos">Fairfax</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Resseguro</span>
+            <span class="stag sage">Finanças</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🏛️</span>
+          <div class="setor-name">Setor Público</div>
+          <div class="setor-cos">Governo de São Paulo</div>
+          <div class="setor-tags">
+            <span class="stag">Power Apps</span>
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Governo</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🏠</span>
+          <div class="setor-name">Imóveis & Aluguel</div>
+          <div class="setor-cos">Bluertec</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Real Estate</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">👔</span>
+          <div class="setor-name">Varejo de Moda</div>
+          <div class="setor-cos">Aramis · Ammo Varejo</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Vendas</span>
+            <span class="stag sage">Moda</span>
+          </div>
+        </div>
+
+        <div class="setor-card">
+          <span class="setor-icon">🚗</span>
+          <div class="setor-name">Locadora de Veículos</div>
+          <div class="setor-cos">LM Locadora</div>
+          <div class="setor-tags">
+            <span class="stag">Power BI</span>
+            <span class="stag sage">Frota</span>
+            <span class="stag sage">Mobilidade</span>
+          </div>
+        </div>
+
+      </div><!-- /setor-grid -->
+    </div><!-- /outros-wrap -->
+
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="contato" id="contato">
+  <div class="section-inner">
+    <div class="sec-label">Contato</div>
+    <h2 class="sec-title">Vamos conversar?</h2>
+    <p class="sec-desc">Estou disponível para projetos de BI, dashboards, modelagem de dados e automação. Me chama!</p>
+    <div class="contato-cards">
+      <a href="https://wa.me/5511998494787" target="_blank" class="contato-card">
+        <div class="ico">💬</div>
+        <div class="lbl">WhatsApp</div>
+        <div class="val">(11) 99849-4787</div>
+      </a>
+      <a href="https://www.linkedin.com/in/francieli-goncalves-277845165/" target="_blank" class="contato-card">
+        <div class="ico">💼</div>
+        <div class="lbl">LinkedIn</div>
+        <div class="val">Francieli Gonçalves</div>
+      </a>
+      <a href="mailto:" class="contato-card">
+        <div class="ico">✉️</div>
+        <div class="lbl">E-mail</div>
+        <div class="val">Enviar mensagem</div>
+      </a>
+      <a href="curriculo_francieli.html" target="_blank" class="contato-card">
+        <div class="ico">📄</div>
+        <div class="lbl">Currículo</div>
+        <div class="val">Ver currículo completo</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="footer-bar">
+  <span>© 2026 Francieli Gonçalves</span>
+  <span>Feito com <span>♥</span> e Power BI</span>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-company" id="mCompany"></div>
+        <div class="modal-title" id="mTitle"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-dash-area" id="mDash"></div>
+    <div class="modal-ftr" id="mFtr"></div>
+  </div>
+</div>
+
+<script>
+  // ══ ANIMAÇÕES ══
+  function countUp(el, target, duration) {
+    let start = 0, step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = Math.floor(start) + (target === 98 ? '%' : '+');
+      if (start >= target) clearInterval(timer);
+    }, 16);
+  }
+  function animateBars() {
+    document.querySelectorAll('.hd-bfill').forEach((b, i) => {
+      setTimeout(() => { b.style.width = b.dataset.w + '%'; }, i * 150 + 400);
+    });
+  }
+  const dash = document.getElementById('heroDash');
+  new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        countUp(document.getElementById('kv1'), 345, 1800);
+        countUp(document.getElementById('kv2'), 98,  1400);
+        countUp(document.getElementById('kv3'), 15,  1000);
+        animateBars();
+      }
+    });
+  }, { threshold: 0.3 }).observe(dash);
+
+  new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        document.querySelectorAll('.proc-step').forEach((s, i) => {
+          setTimeout(() => s.classList.add('visible'), i * 180);
+        });
+      }
+    });
+  }, { threshold: 0.2 }).observe(document.querySelector('.proc-flow'));
+
+  // ══ HELPER DASHBOARD ══
+  function bars(list, accent, light) {
+    const txt = light ? 'rgba(30,30,30,0.5)' : 'rgba(255,255,255,0.5)';
+    const bg  = light ? 'rgba(0,0,0,0.08)'   : 'rgba(255,255,255,0.1)';
+    return list.map(b => `
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px">
+        <span style="font-size:9px;color:${txt};min-width:64px;font-weight:600">${b[0]}</span>
+        <div style="flex:1;height:6px;background:${bg};border-radius:3px">
+          <div style="width:${b[1]}%;height:100%;background:${accent};border-radius:3px"></div>
+        </div>
+        <span style="font-size:9px;color:${txt};font-weight:700">${b[1]}%</span>
+      </div>`).join('');
+  }
+  function kpi(v, l, accent, blur, light) {
+    const sub = light ? 'rgba(30,30,30,0.5)' : 'rgba(255,255,255,0.55)';
+    return `<div style="background:${accent}22;border:1px solid ${accent}44;border-radius:10px;padding:12px;text-align:center">
+      <div style="font-size:20px;font-weight:900;color:${accent};filter:${blur?'blur(5px)':''};line-height:1">${v}</div>
+      <div style="font-size:9px;color:${sub};margin-top:5px;font-weight:600;line-height:1.3">${l}</div>
+    </div>`;
+  }
+  function panel(title, content, light) {
+    const bg  = light ? 'rgba(0,0,0,0.05)' : 'rgba(255,255,255,0.06)';
+    const lbl = light ? 'rgba(30,30,30,0.4)' : 'rgba(255,255,255,0.4)';
+    return `<div style="background:${bg};border-radius:10px;padding:14px">
+      <div style="font-size:9px;color:${lbl};font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">${title}</div>
+      ${content}
+    </div>`;
+  }
+  function dashWrap(bg, header, headerAccent, kpis, p1, p2) {
+    return `<div style="background:${bg};width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
+      <div style="background:${headerAccent};border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff">${header}</div>
+      <div style="display:grid;grid-template-columns:repeat(${kpis.length},1fr);gap:8px">${kpis.join('')}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">${p1}${p2}</div>
+    </div>`;
+  }
+
+  // ══ DADOS DOS PROJETOS ══
+  const PROJ = {
+    daiichi: {
+      company: 'Daiichi Sankyo', title: 'Dashboard RH — PDI & 9Box',
+      tags: ['Power BI','RH Analytics','9Box','PDI','Sucessão'], conf: true,
+      dash: dashWrap('#0f2240','Desenvolvimento Organizacional / PDI','rgba(0,90,180,0.7)',
+        [kpi('███','Colaboradores','#4fc3f7',true),kpi('██','Com PDI','#4dd0a0',true),kpi('██%','% PDI','#4fc3f7',true),kpi('██%','Acima Limite','#ef5350',true)],
+        panel('Visão 9Box',`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+          ${['7','8','9','4','5','6','1','2','3'].map((n,i)=>`<div style="background:${i<3?'rgba(77,208,160,0.4)':i<6?'rgba(79,195,247,0.4)':'rgba(120,120,120,0.4)'};border-radius:5px;height:32px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff">${n}</div>`).join('')}
+        </div>`),
+        panel('PDI por Área', bars([['Comercial',90],['Marketing',78],['Operações',65],['TI',55],['Logística',40]],'#4fc3f7')))
+    },
+    cc: {
+      company: 'Casa & Construção', title: 'Painel de Navegação SAP',
+      tags: ['Power Apps','SAP','UX Design','Financeiro','Contábil'], conf: false,
+      dash: `<div style="background:#f0f4f8;width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
+        <div style="background:#f47920;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff;display:flex;justify-content:space-between"><span>Painel de Navegação Corporativa — C&amp;C</span><span style="opacity:.8">Gestão Integrada SAP</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">
+          ${[['Contábil','#e65100',['Exibir Doc. · FB03','Partidas · FBL3N','Razão Geral · FAGLL03','Razão HANA · FAGLL03H']],
+             ['Financeiro','#1565c0',['Contas a Rec. · FBLSH_AR','Contas a Pagar · FBL1H','Balanço Pat. · F.01','Diário Cont. · S_ALR']],
+             ['Fiscal','#2e7d32',['SPED Contábil','Apuração IS','DCTF','DIRF']],
+             ['Relatórios','#6a1b9a',['DRE','Fluxo de Caixa','Balance Sheet','Aging']]
+          ].map(([mod,c,items])=>`
+            <div style="background:#fff;border-radius:10px;border:1px solid #e0e8f0;padding:12px">
+              <div style="font-size:10px;font-weight:800;color:${c};margin-bottom:8px">● ${mod}</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+                ${items.map((it,i)=>`<div style="background:${i%2===0?c:'#f0f4ff'};border-radius:6px;padding:7px 8px;font-size:8px;font-weight:700;color:${i%2===0?'#fff':c}">${it}</div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`
+    },
+    terra: {
+      company: 'Terra Investimentos', title: 'Painel Financeiro — AuC & Receita',
+      tags: ['Power BI','Financeiro','AuC','Investimentos','B2B'], conf: true,
+      dash: dashWrap('#0a1a0a','Painel Geral — Terra Investimentos','rgba(0,120,40,0.5)',
+        [kpi('███.███','Resultado Dia','#4dd0a0',true),kpi('█,██ Bi','AuC Total','#4fc3f7',true),kpi('██.███','Clientes Ativos','#4dd0a0',true),kpi('-█.███','Churn','#ef5350',true)],
+        panel('Receita por Mesa', bars([['Bovespa',90],['Rio de Jan.',62],['Agrícola',57],['B2C SP',52],['Escritórios',35]],'#4dd0a0')),
+        panel('AuC por Segmento', bars([['Renda Fixa',95],['À Vista',45],['Fundos',22],['Tesouro',10]],'#ffb74d')))
+    },
+    logistica: {
+      company: 'Truckweb · Etrind', title: 'Dashboard de Logística & Frota',
+      tags: ['Power BI','Logística','Frota','Operações','KPI'], conf: false,
+      dash: dashWrap('#0d1a0d','Monitoramento de Frota e Entregas','rgba(255,143,0,0.6)',
+        [kpi('1.284','Entregas/mês','#ff8f00'),kpi('94%','On-Time Rate','#66bb6a'),kpi('48','Veículos Ativos','#ff8f00'),kpi('6,2%','Avarias','#ef5350')],
+        panel('Desempenho por Rota', bars([['SP Capital',92],['Interior SP',88],['Sul',80],['Nordeste',73],['Norte',61]],'#ff8f00')),
+        panel('Ocorrências por Tipo', bars([['Atraso',45],['Avaria',28],['Extravio',15],['Recusa',8]],'#ef5350')))
+    },
+    pld: {
+      company: 'Fato', title: 'Dashboard PLD — Prevenção à Lavagem de Dinheiro',
+      tags: ['Power BI','Compliance','PLD','Risco','Alertas'], conf: true,
+      dash: dashWrap('#1a0a0a','Monitoramento de Riscos — PLD','rgba(220,38,38,0.5)',
+        [kpi('███','Alertas Ativos','#ef4444',true),kpi('██%','Alto Risco','#f97316',true),kpi('██','Em Análise','#fbbf24',true),kpi('██%','Resolvidos','#22c55e',true)],
+        panel('Alertas por Categoria', bars([['Operação suspeita',85],['Moviment. atípica',72],['Cadastro irregular',58],['Concentração',45],['Lavagem',30]],'#ef4444')),
+        panel('Risco por Segmento', bars([['PJ Internacional',90],['PJ Nacional',65],['PF Alta Renda',55],['PF Regular',30]],'#f97316')))
+    },
+    mobilidade: {
+      company: 'TAG · Sem Parar', title: 'Dashboard de Mobilidade & Pedágio',
+      tags: ['Power BI','Mobilidade','Pedágio','TAG','Receita'], conf: false,
+      dash: dashWrap('#0a1220','Painel de Monitoramento — TAG & Sem Parar','rgba(59,130,246,0.5)',
+        [kpi('2,4 Mi','Tags Ativas','#60a5fa'),kpi('R$ 18M','Receita Mensal','#34d399'),kpi('3,1 Mi','Passagens/dia','#60a5fa'),kpi('98,7%','Uptime','#34d399')],
+        panel('Volume por Rodovia', bars([['Anhanguera',95],['Bandeirantes',90],['Raposo',82],['Castelo Branco',78],['Fernão Dias',70]],'#60a5fa')),
+        panel('Passagens por Período', bars([['Manhã',88],['Tarde',75],['Noite',55],['Madrugada',22]],'#818cf8')))
+    },
+    samsung: {
+      company: 'Samsung', title: 'Dashboard de Vendas — Eletrônicos',
+      tags: ['Power BI','Vendas','Varejo','Eletrônicos','Canal'], conf: false,
+      dash: dashWrap('#0a0f2e','Painel de Vendas — Samsung Brasil','rgba(20,40,160,0.6)',
+        [kpi('48.320','Units Sold','#6d9eeb'),kpi('R$ 142M','Receita','#34d399'),kpi('32%','Market Share','#6d9eeb'),kpi('18%','↑ vs LY','#34d399')],
+        panel('Vendas por Categoria', bars([['Smartphones',92],['TVs',78],['Eletrodom.',65],['Tablets',48],['Wearables',35]],'#6d9eeb')),
+        panel('Canal de Venda', bars([['E-commerce',80],['Varejo Físico',72],['Operadoras',65],['B2B',40]],'#4dd0a0')))
+    },
+    zurich: {
+      company: 'Zurich Seguros', title: 'Dashboard de Sinistros & Prêmios',
+      tags: ['Power BI','Seguros','Sinistros','Loss Ratio','Prêmio'], conf: true,
+      dash: dashWrap('#091526','Painel de Gestão — Zurich Seguros','rgba(0,136,194,0.5)',
+        [kpi('███,███','Prêmio Emitido','#00a0dc',true),kpi('██%','Loss Ratio','#ef4444',true),kpi('██.███','Apólices','#00a0dc',true),kpi('██%','Renovação','#34d399',true)],
+        panel('Sinistros por Ramo', bars([['Auto',88],['Vida',72],['Patrimonial',60],['Responsabilidade',48],['Agrícola',35]],'#00a0dc')),
+        panel('Loss Ratio por Região', bars([['Sul',78],['Sudeste',65],['Centro-Oeste',58],['Nordeste',52],['Norte',45]],'#f97316')))
+    },
+    telefonia: {
+      company: 'Claro · Telefonica · OI', title: 'Dashboard de Telecom & Assinantes',
+      tags: ['Power BI','Telecom','Churn','ARPU','NPS'], conf: false,
+      dash: dashWrap('#0f0a1e','Painel de Performance — Telefonia','rgba(139,92,246,0.5)',
+        [kpi('4,2 Mi','Assinantes','#a78bfa'),kpi('R$ 68','ARPU','#34d399'),kpi('2,8%','Churn Mensal','#ef4444'),kpi('62','NPS','#fbbf24')],
+        panel('Assinantes por Plano', bars([['Pós-pago Premium',85],['Pós-pago Basic',70],['Pré-pago',60],['Controle',50],['Corporativo',40]],'#a78bfa')),
+        panel('Churn por Motivo', bars([['Preço',78],['Qualidade rede',62],['Atendimento',48],['Concorrência',38]],'#f87171')))
+    },
+    educacao: {
+      company: 'Falconi · Somos Educação', title: 'Dashboard Educacional',
+      tags: ['Power BI','Educação','Desempenho','Conclusão','EdTech'], conf: false,
+      dash: `<div style="background:#fffbeb;width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
+        <div style="background:#d97706;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff">Painel Educacional — Desempenho & Matrículas</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          ${[['18.540','Alunos Ativos','#d97706'],['87%','Taxa Conclusão','#16a34a'],['4,2','Nota Média','#2563eb'],['94%','Satisfação','#7c3aed']].map(([v,l,c])=>kpi(v,l,c,false,true)).join('')}
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">
+          ${panel('Conclusão por Curso', bars([['Gestão',92],['Liderança',88],['Operações',82],['Vendas',75],['RH',68]],'#d97706',true), true)}
+          ${panel('Desempenho por Turma', bars([['Turma A',95],['Turma B',88],['Turma C',80],['Turma D',72]],'#16a34a',true), true)}
+        </div>
+      </div>`
+    },
+    saude: {
+      company: 'Havas · Daiichi Sankyo', title: 'Dashboard de Saúde & Marketing Pharma',
+      tags: ['Power BI','Saúde','Marketing Digital','CPC','ROAS'], conf: false,
+      dash: dashWrap('#071522','Painel Pharma — Campanhas & Impacto','rgba(6,182,212,0.5)',
+        [kpi('2,8M','Impressões','#22d3ee'),kpi('R$ 0,42','CPC Médio','#34d399'),kpi('4,8x','ROAS','#fbbf24'),kpi('68%','Engajamento HCP','#22d3ee')],
+        panel('Performance por Canal', bars([['Google Ads',90],['Meta Ads',78],['LinkedIn',65],['Programática',55],['Email',42]],'#22d3ee')),
+        panel('CTR por Segmento', bars([['Cardiologistas',85],['Oncologistas',78],['Clínicos',65],['Reumatologistas',52]],'#818cf8')))
+    },
+    resseguro: {
+      company: 'Fairfax', title: 'Dashboard de Resseguro',
+      tags: ['Power BI','Resseguro','Exposição','Prêmio','Cession Rate'], conf: true,
+      dash: dashWrap('#0a0e1a','Painel de Resseguro — Fairfax Brasil','rgba(99,102,241,0.5)',
+        [kpi('███ Mi','Exposição Total','#818cf8',true),kpi('██%','Taxa de Cessão','#34d399',true),kpi('██ Mi','Prêmio Cedido','#818cf8',true),kpi('██%','Loss Ratio','#fbbf24',true)],
+        panel('Cessão por Ramo', bars([['Patrimonial',85],['Responsabilidade',72],['Vida',60],['Marítimo',48],['Agrícola',35]],'#818cf8')),
+        panel('Exposição por País', bars([['Brasil',95],['Argentina',55],['Chile',45],['Colômbia',38],['Peru',28]],'#6ee7b7')))
+    },
+    governo: {
+      company: 'Governo de São Paulo', title: 'Painel de Serviços Públicos',
+      tags: ['Power Apps','Power BI','Governo','Poupatempo','Cidadão'], conf: false,
+      dash: dashWrap('#0a1530','Painel de Serviços — Governo de São Paulo','rgba(29,78,216,0.6)',
+        [kpi('3,2 Mi','Atendimentos/mês','#60a5fa'),kpi('14 min','Tempo Médio','#34d399'),kpi('91%','Satisfação','#fbbf24'),kpi('68%','Digital','#60a5fa')],
+        panel('Atendimentos por Serviço', bars([['Poupatempo',95],['Saúde SP',80],['Eleições',75],['Educação',65],['Habitação',50]],'#60a5fa')),
+        panel('Canal de Atendimento', bars([['App/Web',68],['Presencial',48],['Telefone',32],['WhatsApp',28]],'#34d399')))
+    },
+    bluertec: {
+      company: 'Bluertec', title: 'Dashboard de Imóveis & Aluguel',
+      tags: ['Power BI','Imóveis','Ocupação','Receita','Inadimplência'], conf: false,
+      dash: `<div style="background:#fff8f0;width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
+        <div style="background:#ea580c;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff">Painel de Gestão Imobiliária — Bluertec</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          ${[['1.847','Imóveis Gerenc.','#ea580c'],['92%','Taxa Ocupação','#16a34a'],['R$ 4,2M','Receita Mensal','#ea580c'],['3,8%','Inadimplência','#dc2626']].map(([v,l,c])=>kpi(v,l,c,false,true)).join('')}
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">
+          ${panel('Ocupação por Tipo', bars([['Comercial',96],['Residencial',91],['Industrial',85],['Misto',78]],'#ea580c',true), true)}
+          ${panel('Receita por Região', bars([['SP Capital',90],['Grande SP',75],['Interior',65],['Litoral',55]],'#16a34a',true), true)}
+        </div>
+      </div>`
+    },
+    moda: {
+      company: 'Aramis · Ammo Varejo', title: 'Dashboard de Varejo de Moda',
+      tags: ['Power BI','Moda','Sell-Through','Margem','Varejo'], conf: false,
+      dash: `<div style="background:#fdf4ff;width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
+        <div style="background:#9333ea;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff">Painel de Performance — Varejo de Moda</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+          ${[['R$ 28M','Faturamento','#9333ea'],['68%','Sell-Through','#16a34a'],['42%','Margem Bruta','#9333ea'],['NPS 74','Satisfação','#f59e0b']].map(([v,l,c])=>kpi(v,l,c,false,true)).join('')}
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">
+          ${panel('Venda por Categoria', bars([['Camisas',88],['Calças',80],['Blazers',72],['Acessórios',60],['Tênis',52]],'#9333ea',true), true)}
+          ${panel('Performance por Loja', bars([['Flagship SP',95],['Shopping A',82],['E-commerce',78],['Shopping B',70]],'#f59e0b',true), true)}
+        </div>
+      </div>`
+    },
+    locadora: {
+      company: 'LM Locadora', title: 'Dashboard de Locação de Veículos',
+      tags: ['Power BI','Frota','Locação','Manutenção','Receita'], conf: false,
+      dash: dashWrap('#071a07','Painel de Frota & Locação — LM Locadora','rgba(34,197,94,0.4)',
+        [kpi('342','Veículos Ativos','#4ade80'),kpi('84%','Taxa Utilização','#34d399'),kpi('R$ 2,1M','Receita/mês','#4ade80'),kpi('18','Em Manutenção','#fbbf24')],
+        panel('Utilização por Categoria', bars([['SUVs',92],['Sedans',88],['Compactos',80],['Comerciais',72],['Luxo',60]],'#4ade80')),
+        panel('Receita por Canal', bars([['App Próprio',78],['Aeroportos',70],['Parceiros',58],['Balcão',45]],'#34d399')))
+    }
+  };
+
+  // ══ MODAL ══
+  function openModal(id) {
+    const p = PROJ[id]; if (!p) return;
+    document.getElementById('mCompany').textContent = p.company;
+    document.getElementById('mTitle').textContent   = p.title;
+    document.getElementById('mDash').innerHTML      = p.dash;
+    const ftr = document.getElementById('mFtr');
+    ftr.innerHTML = p.tags.map((t,i) => `<span class="ptag${i>2?' sage':''}">${t}</span>`).join('');
+    if (p.conf) ftr.innerHTML += `<span class="modal-conf">Dados ocultados por confidencialidade</span>`;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  document.getElementById('modalOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Associa cards aos projetos
+  const cardMap = {
+    'Logística':'logistica','Prevenção à Lavagem de Dinheiro':'pld',
+    'Mobilidade & Pedágio':'mobilidade','Varejo de Eletrônicos':'samsung',
+    'Seguradora':'zurich','Telefonia':'telefonia','Educação':'educacao',
+    'Saúde & Pharma':'saude','Resseguro':'resseguro','Setor Público':'governo',
+    'Imóveis & Aluguel':'bluertec','Varejo de Moda':'moda','Locadora de Veículos':'locadora'
+  };
+  document.querySelectorAll('.proj-card').forEach(c => {
+    const co = c.querySelector('.proj-company')?.textContent.trim();
+    const id = co === 'Daiichi Sankyo' ? 'daiichi'
+             : (co === 'Casa & Construção' || co === 'Casa &amp; Construção') ? 'cc'
+             : 'terra';
+    c.onclick = () => openModal(id);
+  });
+  document.querySelectorAll('.setor-card').forEach(c => {
+    const name = c.querySelector('.setor-name')?.textContent.trim();
+    const id = cardMap[name];
+    if (id) c.onclick = () => openModal(id);
+  });
+</script>
+
+</body>
+</html>
