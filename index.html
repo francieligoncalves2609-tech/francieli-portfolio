@@ -436,9 +436,9 @@
     transition: all .25s; cursor: default;
   }
   .setor-card:hover {
-    border-color: rgba(0,188,200,0.4);
-    box-shadow: 0 8px 28px rgba(0,188,200,0.1);
-    transform: translateY(-3px);
+    border-color: var(--border);
+    box-shadow: none;
+    transform: none;
   }
   .setor-icon { font-size: 26px; margin-bottom: 10px; display: block }
   .setor-name { font-size: 13px; font-weight: 800; color: var(--dark); margin-bottom: 4px }
@@ -490,7 +490,8 @@
   .modal-conf { font-size: 10px; color: var(--muted); font-style: italic; margin-left: auto }
   .modal-conf::before { content: '🔒 ' }
 
-  .proj-card, .setor-card { cursor: pointer }
+  .proj-card { cursor: pointer }
+  .setor-card { cursor: default }
 
   /* ══ CONTATO ══ */
   .contato {
@@ -1107,40 +1108,17 @@
     daiichi: {
       company: 'Daiichi Sankyo', title: 'Dashboard RH — PDI & 9Box',
       tags: ['Power BI','RH Analytics','9Box','PDI','Sucessão'], conf: true,
-      dash: dashWrap('#0f2240','Desenvolvimento Organizacional / PDI','rgba(0,90,180,0.7)',
-        [kpi('███','Colaboradores','#4fc3f7',true),kpi('██','Com PDI','#4dd0a0',true),kpi('██%','% PDI','#4fc3f7',true),kpi('██%','Acima Limite','#ef5350',true)],
-        panel('Visão 9Box',`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
-          ${['7','8','9','4','5','6','1','2','3'].map((n,i)=>`<div style="background:${i<3?'rgba(77,208,160,0.4)':i<6?'rgba(79,195,247,0.4)':'rgba(120,120,120,0.4)'};border-radius:5px;height:32px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff">${n}</div>`).join('')}
-        </div>`),
-        panel('PDI por Área', bars([['Comercial',90],['Marketing',78],['Operações',65],['TI',55],['Logística',40]],'#4fc3f7')))
+      dash: `<img src="dash_daichisankyo.png" alt="Dashboard RH — PDI &amp; 9Box" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:8px">`
     },
     cc: {
       company: 'Casa & Construção', title: 'Painel de Navegação SAP',
       tags: ['Power Apps','SAP','UX Design','Financeiro','Contábil'], conf: false,
-      dash: `<div style="background:#f0f4f8;width:100%;height:100%;padding:18px;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',sans-serif;box-sizing:border-box">
-        <div style="background:#f47920;border-radius:8px;padding:9px 14px;font-size:11px;font-weight:800;color:#fff;display:flex;justify-content:space-between"><span>Painel de Navegação Corporativa — C&amp;C</span><span style="opacity:.8">Gestão Integrada SAP</span></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1">
-          ${[['Contábil','#e65100',['Exibir Doc. · FB03','Partidas · FBL3N','Razão Geral · FAGLL03','Razão HANA · FAGLL03H']],
-             ['Financeiro','#1565c0',['Contas a Rec. · FBLSH_AR','Contas a Pagar · FBL1H','Balanço Pat. · F.01','Diário Cont. · S_ALR']],
-             ['Fiscal','#2e7d32',['SPED Contábil','Apuração IS','DCTF','DIRF']],
-             ['Relatórios','#6a1b9a',['DRE','Fluxo de Caixa','Balance Sheet','Aging']]
-          ].map(([mod,c,items])=>`
-            <div style="background:#fff;border-radius:10px;border:1px solid #e0e8f0;padding:12px">
-              <div style="font-size:10px;font-weight:800;color:${c};margin-bottom:8px">● ${mod}</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
-                ${items.map((it,i)=>`<div style="background:${i%2===0?c:'#f0f4ff'};border-radius:6px;padding:7px 8px;font-size:8px;font-weight:700;color:${i%2===0?'#fff':c}">${it}</div>`).join('')}
-              </div>
-            </div>`).join('')}
-        </div>
-      </div>`
+      dash: `<img src="dash_cec.png" alt="Painel de Navegação SAP — Casa &amp; Construção" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:8px">`
     },
     terra: {
       company: 'Terra Investimentos', title: 'Painel Financeiro — AuC & Receita',
       tags: ['Power BI','Financeiro','AuC','Investimentos','B2B'], conf: true,
-      dash: dashWrap('#0a1a0a','Painel Geral — Terra Investimentos','rgba(0,120,40,0.5)',
-        [kpi('███.███','Resultado Dia','#4dd0a0',true),kpi('█,██ Bi','AuC Total','#4fc3f7',true),kpi('██.███','Clientes Ativos','#4dd0a0',true),kpi('-█.███','Churn','#ef5350',true)],
-        panel('Receita por Mesa', bars([['Bovespa',90],['Rio de Jan.',62],['Agrícola',57],['B2C SP',52],['Escritórios',35]],'#4dd0a0')),
-        panel('AuC por Segmento', bars([['Renda Fixa',95],['À Vista',45],['Fundos',22],['Tesouro',10]],'#ffb74d')))
+      dash: `<img src="dash_terra_investimentos.png" alt="Painel Financeiro AuC &amp; Receita — Terra Investimentos" style="width:100%;height:100%;object-fit:cover;object-position:top;border-radius:8px">`
     },
     logistica: {
       company: 'Truckweb · Etrind', title: 'Dashboard de Logística & Frota',
@@ -1302,11 +1280,7 @@
              : 'terra';
     c.onclick = () => openModal(id);
   });
-  document.querySelectorAll('.setor-card').forEach(c => {
-    const name = c.querySelector('.setor-name')?.textContent.trim();
-    const id = cardMap[name];
-    if (id) c.onclick = () => openModal(id);
-  });
+  // setor-cards (Core de Atuações) — sem clique
 </script>
 
 </body>
